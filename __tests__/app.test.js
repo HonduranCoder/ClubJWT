@@ -54,7 +54,7 @@ describe('lazy-bouncer routes', () => {
     const me = await agent.get('/api/v1/users/me');
 
     expect(me.body).toEqual({
-      ...user.toJSON(),
+      ...user,
       exp: expect.any(Number),
       iat: expect.any(Number),
     });
@@ -83,6 +83,6 @@ describe('lazy-bouncer routes', () => {
     const [agent, user] = await registerAndLogin({ email: 'admin' });
     const res = await agent.get('/api/v1/users');
 
-    expect(res.body).toEqual([user.toJSON()]);
+    expect(res.body).toEqual([{ ...user }]);
   });
 });
